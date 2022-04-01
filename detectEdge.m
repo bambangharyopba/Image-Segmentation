@@ -1,14 +1,14 @@
-function img_edge = detectedge(img, method, threshold, type)
+function img_edge = detectEdge(img, method, threshold, type)
     
     switch type
         case {'gray', 'grey'}
             I = im2gray(img);
         case 'red'
-            I = img(:,:,1);
+            I = img(:,:,1)-img(:,:,2)-img(:,:,3);
         case 'green'
-            I = img(:,:,2);
+            I = img(:,:,2)-img(:,:,1)-img(:,:,3);
         case 'blue'
-            I = img(:,:,3);
+            I = img(:,:,3)-img(:,:,1)-img(:,:,2);
         case 'rgb'
             I = img;
         case 'rgb-grad'
