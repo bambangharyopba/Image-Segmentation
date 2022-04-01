@@ -1,20 +1,17 @@
-function img_edge = detectEdge(img, method, threshold, type)
-    
+function img_edge = detectEdge(img, sigma, method, threshold, type)
+    img = imgaussfilt(img, sigma);
+
     switch type
-        case {'gray', 'grey'}
-            I = im2gray(img);
-        case 'red'
+        case 'Red'
             I = img(:,:,1)-img(:,:,2)-img(:,:,3);
-        case 'green'
+        case 'Green'
             I = img(:,:,2)-img(:,:,1)-img(:,:,3);
-        case 'blue'
+        case 'Blue'
             I = img(:,:,3)-img(:,:,1)-img(:,:,2);
-        case 'rgb'
-            I = img;
-        case 'rgb-grad'
         otherwise
+            I = im2gray(img);
     end
-    
+
     switch method
         case "Laplace"
             H1 = [1 1 1; 1 -8 1; 1 1 1];
